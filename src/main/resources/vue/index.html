@@ -1,205 +1,124 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>W3.CSS Template</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC">
-<style>
-body, html {height: 100%}
-body,h1,h2,h3,h4,h5,h6 {font-family: "Amatic SC", sans-serif}
-.menu {display: none}
-.bgimg {
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-image: url('https://media.giphy.com/media/3o6Yg24rybQMeZQuxq/giphy.gif');
-      background-size: cover; /* Asegura que el fondo cubra todo el espacio */
-      background-position: center; /* Centra el GIF */
-      background-repeat: no-repeat; /* Evita que el GIF se repita */
-  min-height: 90%;
-}
-.tablink:hover {
-  background-color: #6f6463 !important; /* Hover gris personalizado */
-  }
-
-  /* Estilos del contenedor */
-  #contact-map-container {
-        width: 100%;
-        height: 400px; /* Ajusta la altura según lo necesario */
-      }
-/* Estilos del store-locator */
-gmpx-store-locator {
-        width: 100%;
-        height: 100%;
-        --gmpx-color-surface: #fff;
-        --gmpx-color-on-surface: #212121;
-        --gmpx-color-on-surface-variant: #757575;
-        --gmpx-color-primary: #1967d2;
-        --gmpx-color-outline: #e0e0e0;
-        --gmpx-fixed-panel-width-row-layout: 28.5em;
-        --gmpx-fixed-panel-height-column-layout: 65%;
-        --gmpx-font-family-base: "Roboto", sans-serif;
-        --gmpx-font-family-headings: "Roboto", sans-serif;
-        --gmpx-font-size-base: 0.875rem;
-        --gmpx-hours-color-open: #188038;
-        --gmpx-hours-color-closed: #d50000;
-        --gmpx-rating-color: #ffb300;
-        --gmpx-rating-color-empty: #e0e0e0;
-      }
-</style>
+    <title>W3.CSS Template</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC">
+    <style>
+        body, html {height: 100%}
+        body,h1,h2,h3,h4,h5,h6 {font-family: "Amatic SC", sans-serif}
+        .menu {display: none}
+        .bgimg {
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-image: url('https://media.giphy.com/media/3o6Yg24rybQMeZQuxq/giphy.gif');
+            background-position: center;
+            min-height: 90%;
+        }
+        .tablink:hover {
+            background-color: #6f6463 !important;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+        }
+        .modal-content {
+            margin: 5% auto;
+            padding: 20px;
+            width: 80%;
+            max-width: 800px;
+            background-color: #fff;
+            position: relative;
+        }
+        .close {
+            color: #fff;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 35px;
+            font-weight: bold;
+            background: #ff4d4d;
+            border-radius: 50%;
+            padding: 0 10px;
+            cursor: pointer;
+            z-index: 1000; /* Asegura que la "X" esté al frente */
+        }
+        .close:hover, .close:focus {
+            background: #ff6666;
+        }
+    </style>
 </head>
 <body>
 
-<!-- Navbar (sit on top) -->
+<!-- Navbar -->
 <div class="w3-top w3-hide-small">
-  <div class="w3-bar w3-xlarge w3-black w3-opacity w3-hover-opacity-off" id="myNavbar">
-    <a href="#" class="w3-bar-item w3-button">Inicio</a>
-    <a href="#menu" class="w3-bar-item w3-button">Menu</a>
-    <a href="#Contacto" class="w3-bar-item w3-button">Contacto</a>
-    <span class="w3-bar-item w3-button w3-right">Pizzeria Sayajin</span>
-  </div>
-  </div>
+    <div class="w3-bar w3-xlarge w3-black w3-opacity w3-hover-opacity-off" id="myNavbar">
+        <a href="#" class="w3-bar-item w3-button" onclick="openModal('menuModal')">Menu</a>
+        <a href="#" class="w3-bar-item w3-button" onclick="openModal('contactModal')">Contacto</a>
+    </div>
 </div>
   
 <!-- Header with image -->
 <header class="bgimg w3-display-container w3-grayscale-min" id="home">
-  <div class="w3-display-bottomleft w3-padding">
-    <span class="w3-tag w3-xlarge">Abierto de 10AM a 10PM</span>
-  </div>
-  <div class="w3-display-middle w3-center">
-    
-    <p><a href="#menu" class="w3-button w3-xxlarge w3-black">Quiero ver el Menu</a></p>
-  </div>
+    <div class="w3-display-bottomleft w3-padding">
+        <span class="w3-tag w3-xlarge">Abierto de 10AM a 10PM</span>
+    </div>
+    <div class="w3-display-middle w3-center">
+        <p><a href="#" onclick="openModal('menuModal')" class="w3-button w3-xxlarge w3-black">Quiero ver el Menu</a></p>
+    </div>
 </header>
 
-<!-- Menu Container -->
-<div class="w3-container w3-black w3-padding-64 w3-xxlarge" id="menu">
-  <div class="w3-content">
-  
-    <h1 class="w3-center w3-jumbo" style="margin-bottom:64px"></h1>
-    <div class="w3-row w3-center w3-border w3-border-dark-grey">
-      <a href="javascript:void(0)" onclick="openMenu(event, 'Pizza');" id="myLink">
-        <div class="w3-col s4 tablink w3-padding-large w3-hover-red">Pizza</div>
-      </a>
-      <a href="javascript:void(0)" onclick="openMenu(event, 'Ensaladas');" id="myLink">
-        <div class="w3-col s4 tablink w3-padding-large w3-hover-red">Ensaladas</div>
-      </a>
-      <a href="javascript:void(0)" onclick="openMenu(event, 'Adicionales');" id="myLink">
-        <div class="w3-col s4 tablink w3-padding-large w3-hover-red">Adicionales</div>
-      </a>
+<!-- Menu Modal -->
+<div id="menuModal" class="modal">
+    <div class="modal-content w3-animate-top">
+        <span class="close" onclick="closeModal('menuModal')">&times;</span>
+        <div id="menuContent"></div>
     </div>
-
-    <div id="Pizza" class="w3-container menu w3-padding-32 w3-white">
-      <h1><b>Margarita</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$12.50</span></h1>
-      <p class="w3-text-grey">Tomate, Mozarrella, fresh basil</p>
-      <hr>
-   
-      <h1><b>Quesillo</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$15.50</span></h1>
-      <p class="w3-text-grey">Cuatro Quesos (mozzarella, parmesan, pecorino, jarlsberg)</p>
-      <hr>
-      
-      <h1><b>Fry Chicken</b><span class="w3-right w3-tag w3-dark-grey w3-round">$17.00</span></h1>
-      <p class="w3-text-grey">Fresh tomatoes, mozzarella, chicken, onions</p>
-      <hr>
-
-      <h1><b>Hawuaiana</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$16.50</span></h1>
-      <p class="w3-text-grey">Tomates, Mozzarella, Pina, Jamon, fresh basil</p>
-      <hr>
-
-      <h1><b>Carnes</b> <span class="w3-tag w3-red w3-round">Hot!</span><span class="w3-right w3-tag w3-dark-grey w3-round">$20.00</span></h1>
-      <p class="w3-text-grey">Tomates, Mozzarella, Pepporoni, Sausage, Beef, chicken</p>
-      <hr>
-
-    </div>
-
-    <div id="Ensaladas" class="w3-container menu w3-padding-32 w3-white">
-      <h1><b>Cesar</b> <span class="w3-tag w3-grey w3-round">Popular</span> <span class="w3-right w3-tag w3-dark-grey w3-round">$13.50</span></h1>
-      <p class="w3-text-grey">Lechuga, Queso Panela, Parmesano, Pechuga Asada</p>
-      <hr>
-   
-      <h1><b>Griega</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$14.50</span></h1>
-      <p class="w3-text-grey">Pepino, Pollo, Pasta Fusilli, Queso de Cabra, Lechuga</p>
-      <hr>
-      
-      <h1><b>Dulces</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$11.00</span></h1>
-      <p class="w3-text-grey">Mango, Durazno, Fresa, Guayaba, Yogurth Griego, Zarzamora</p>
-      <hr>
-
-      <h1><b>Oreo</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$25.50</span></h1>
-      <p class="w3-text-grey">Durazno en almibar, Cerezas, Fresas, Galleta Oreo</p>
-    </div>
-
-
-    <div id="Adicionales" class="w3-container menu w3-padding-32 w3-white">
-      <h1><b>Hamburguesas</b> <span class="w3-tag w3-grey w3-round">Seasonal</span><span class="w3-right w3-tag w3-dark-grey w3-round">$5.50</span></h1>
-      <p class="w3-text-grey">Res, Pollo</p>
-      <hr>
-   
-      <h1><b>Hotdog</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$8.50</span></h1>
-      <p class="w3-text-grey">Sencillo, Americano, Chilli</p>
-      <hr>
-      
-      <h1><b>Tortas</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$9.50</span></h1>
-      <p class="w3-text-grey">Nina Pobre, La Gringa, La Cubana</p>
-      <hr>
-      
-      <h1><b>Alitas</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$10.50</span></h1>
-      <p class="w3-text-grey">Buffallo, Salsa Barbacoa, Adobo</p>
-    </div><br>
-
-  </div>
 </div>
 
-<!-- Contacto -->
-<div class="w3-container w3-padding-64 w3-blue-grey w3-grayscale-min w3-xlarge" id="Contacto">
-  <div class="w3-content">
-    <h1 class="w3-center w3-jumbo" style="margin-bottom:64px">Contacto</h1>
-    <p>Find us at some address at some place or call us at 05050515-122330</p>
-    <p><span class="w3-tag">FYI!</span> We offer full-service catering for any event, large or small. We understand your needs and we will cater the food to satisfy the biggest criteria of them all, both look and taste.</p>
-    <p class="w3-xxlarge"><strong>Reserve</strong> a table, ask for today's special or just send us a message:</p>
-    <!-- Mapa de Google Maps usando iframe -->
-<div class="w3-margin-top" id="contact-map-container" style="width: 100%; height: 400px;">
-  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3748.9210273331237!2d-99.34759106152347!3d20.011828938935647!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d22d349d777e11%3A0xf8f1234ccd1b1eb7!2sLa%20casa%20de%20los%20dibujos%20%3A)!5e0!3m2!1ses-419!2smx!4v1730420303168!5m2!1ses-419!2smx" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-</div>
-
-   
-  </div>
+<!-- Contact Modal -->
+<div id="contactModal" class="modal">
+    <div class="modal-content w3-animate-top">
+        <span class="close" onclick="closeModal('contactModal')">&times;</span>
+        <div id="contactContent"></div>
+    </div>
 </div>
 
 <!-- Footer -->
 <footer class="w3-center w3-black w3-padding-48 w3-xxlarge">
-  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
 </footer>
 
 <script>
-  // Tabbed Menu
-  function openMenu(evt, menuName) {
-    var i, x, tablinks;
-
-    // Ocultar todos los menús
-    x = document.getElementsByClassName("menu");
-    for (i = 0; i < x.length; i++) {
-      x[i].style.display = "none";
+    function openModal(modalId) {
+        document.getElementById(modalId).style.display = "block";
     }
 
-    // Restaurar las clases y estilos de todos los tabs
-    tablinks = document.getElementsByClassName("tablink");
-    for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].classList.remove("w3-red");
-      tablinks[i].style.backgroundColor = ""; // Restaurar color de fondo original
+    function closeModal(modalId) {
+        document.getElementById(modalId).style.display = "none";
     }
 
-    // Mostrar el menú seleccionado y aplicar color naranja al tab activo
-    document.getElementById(menuName).style.display = "block";
-    const selectedTab = evt.currentTarget.firstElementChild;
-    selectedTab.style.backgroundColor = "#ef6221"; // Fondo naranja
-  }
+    window.onload = function() {
+        loadContent('menu.html', 'menuContent');
+        loadContent('contacto.html', 'contactContent');
+    };
 
-  // Ejecutar clic automáticamente en el primer tab al cargar la página
-  document.getElementById("myLink").click();
- </script>
-
+    function loadContent(url, elementId) {
+        fetch(url)
+            .then(response => response.text())
+            .then(data => document.getElementById(elementId).innerHTML = data)
+            .catch(error => console.error('Error cargando el contenido:', error));
+    }
+</script>
 
 </body>
 </html>
