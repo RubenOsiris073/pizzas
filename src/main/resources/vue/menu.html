@@ -2,36 +2,114 @@
     <div class="w3-content">
         <h1 class="w3-center w3-jumbo" style="margin-bottom:64px">Menú</h1>
         <div class="w3-row w3-center w3-border w3-border-dark-grey">
-            <div class="w3-col s4 tablink w3-padding-large w3-hover-red">Pizza</div>
-            <div class="w3-col s4 tablink w3-padding-large w3-hover-red">Ensaladas</div>
-            <div class="w3-col s4 tablink w3-padding-large w3-hover-red">Entradas</div>
+            <div class="w3-col s4 tablink w3-padding-large w3-hover-red" onclick="openTab(event, 'Pizza')">Pizza</div>
+            <div class="w3-col s4 tablink w3-padding-large w3-hover-red" onclick="openTab(event, 'Ensaladas')">Ensaladas</div>
+            <div class="w3-col s4 tablink w3-padding-large w3-hover-red" onclick="openTab(event, 'Entradas')">Entradas</div>
         </div>
-        <div id="Pizza" class="w3-container menu w3-padding-32 w3-white">
+
+        <!-- Sección de Pizza -->
+        <div id="Pizza" class="w3-container menu w3-padding-32 w3-white" style="display:block;">
             <h1><b>Margarita</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$12.50</span></h1>
             <p class="w3-text-grey">Tomate, Mozzarella, albahaca fresca</p>
+            <div class="quantity-controls">
+                <button class="quantity-button" onclick="adjustQuantity('pizzaMargarita', -1)">-</button>
+                <input type="number" id="pizzaMargarita" value="0" min="0" class="quantity-input">
+                <button class="quantity-button" onclick="adjustQuantity('pizzaMargarita', 1)">+</button>
+            </div>
             <hr>
+            
             <h1><b>Queso</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$14.50</span></h1>
             <p class="w3-text-grey">Cuatro quesos: mozzarella, parmesano, ricotta, cheddar</p>
+            <div class="quantity-controls">
+                <button class="quantity-button" onclick="adjustQuantity('pizzaQueso', -1)">-</button>
+                <input type="number" id="pizzaQueso" value="0" min="0" class="quantity-input">
+                <button class="quantity-button" onclick="adjustQuantity('pizzaQueso', 1)">+</button>
+            </div>
             <hr>
+            
             <h1><b>Hawaiana</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$16.00</span></h1>
             <p class="w3-text-grey">Jamón, piña, mozzarella</p>
+            <div class="quantity-controls">
+                <button class="quantity-button" onclick="adjustQuantity('pizzaHawaiana', -1)">-</button>
+                <input type="number" id="pizzaHawaiana" value="0" min="0" class="quantity-input">
+                <button class="quantity-button" onclick="adjustQuantity('pizzaHawaiana', 1)">+</button>
+            </div>
             <hr>
         </div>
-        <div id="Ensaladas" class="w3-container menu w3-padding-32 w3-white">
+
+        <!-- Sección de Ensaladas -->
+        <div id="Ensaladas" class="w3-container menu w3-padding-32 w3-white" style="display:none;">
             <h1><b>Ensalada César</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$10.50</span></h1>
             <p class="w3-text-grey">Lechuga, parmesano, crutones, aderezo César</p>
+            <div class="quantity-controls">
+                <button class="quantity-button" onclick="adjustQuantity('ensaladaCesar', -1)">-</button>
+                <input type="number" id="ensaladaCesar" value="0" min="0" class="quantity-input">
+                <button class="quantity-button" onclick="adjustQuantity('ensaladaCesar', 1)">+</button>
+            </div>
             <hr>
+            
             <h1><b>Caprese</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$9.50</span></h1>
             <p class="w3-text-grey">Tomate, mozzarella, albahaca, aceite de oliva</p>
+            <div class="quantity-controls">
+                <button class="quantity-button" onclick="adjustQuantity('ensaladaCaprese', -1)">-</button>
+                <input type="number" id="ensaladaCaprese" value="0" min="0" class="quantity-input">
+                <button class="quantity-button" onclick="adjustQuantity('ensaladaCaprese', 1)">+</button>
+            </div>
             <hr>
         </div>
-        <div id="Entradas" class="w3-container menu w3-padding-32 w3-white">
+
+        <!-- Sección de Entradas -->
+        <div id="Entradas" class="w3-container menu w3-padding-32 w3-white" style="display:none;">
             <h1><b>Bruschetta</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$7.50</span></h1>
             <p class="w3-text-grey">Pan, tomate, ajo, aceite de oliva</p>
+            <div class="quantity-controls">
+                <button class="quantity-button" onclick="adjustQuantity('entradaBruschetta', -1)">-</button>
+                <input type="number" id="entradaBruschetta" value="0" min="0" class="quantity-input">
+                <button class="quantity-button" onclick="adjustQuantity('entradaBruschetta', 1)">+</button>
+            </div>
             <hr>
+            
             <h1><b>Calamares Fritos</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$12.00</span></h1>
             <p class="w3-text-grey">Calamares fritos con limón</p>
+            <div class="quantity-controls">
+                <button class="quantity-button" onclick="adjustQuantity('entradaCalamares', -1)">-</button>
+                <input type="number" id="entradaCalamares" value="0" min="0" class="quantity-input">
+                <button class="quantity-button" onclick="adjustQuantity('entradaCalamares', 1)">+</button>
+            </div>
             <hr>
         </div>
     </div>
 </div>
+
+<script>
+    function openTab(evt, tabName) {
+        var i, x, tablinks;
+        x = document.getElementsByClassName("menu");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].classList.remove("w3-red");
+        }
+
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.classList.add("w3-red");
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelector(".tablink").click();
+    });
+
+    // Función para ajustar la cantidad
+    function adjustQuantity(itemId, change) {
+        var input = document.getElementById(itemId);
+        var currentValue = parseInt(input.value);
+        var newValue = currentValue + change;
+
+        if (newValue >= 0) {
+            input.value = newValue;
+        }
+    }
+</script>

@@ -36,7 +36,7 @@
             padding: 20px;
             width: 80%;
             max-width: 800px;
-            background-color: #fff;
+            background-color: #e8b3b317;
             position: relative;
         }
         .close {
@@ -46,11 +46,11 @@
             right: 20px;
             font-size: 35px;
             font-weight: bold;
-            background: #ff4d4d;
+            background: #f9c3c300;
             border-radius: 50%;
             padding: 0 10px;
             cursor: pointer;
-            z-index: 1000; /* Asegura que la "X" esté al frente */
+            z-index: 1000;
         }
         .close:hover, .close:focus {
             background: #ff6666;
@@ -62,8 +62,8 @@
 <!-- Navbar -->
 <div class="w3-top w3-hide-small">
     <div class="w3-bar w3-xlarge w3-black w3-opacity w3-hover-opacity-off" id="myNavbar">
-        <a href="#" class="w3-bar-item w3-button" onclick="openModal('menuModal')">Menu</a>
-        <a href="#" class="w3-bar-item w3-button" onclick="openModal('contactModal')">Contacto</a>
+        <a href="#" class="w3-bar-item w3-button" onclick="openModal('menuModal', 'menu.html', 'menuContent')"></a>
+        <a href="#" class="w3-bar-item w3-button" onclick="openModal('contactModal', 'contacto.html', 'contactContent')">Contacto</a>
     </div>
 </div>
   
@@ -73,7 +73,7 @@
         <span class="w3-tag w3-xlarge">Abierto de 10AM a 10PM</span>
     </div>
     <div class="w3-display-middle w3-center">
-        <p><a href="#" onclick="openModal('menuModal')" class="w3-button w3-xxlarge w3-black">Quiero ver el Menu</a></p>
+        <p><a href="#" onclick="openModal('menuModal', 'menu.html', 'menuContent')" class="w3-button w3-xxlarge w3-black">Quiero ver el Menu</a></p>
     </div>
 </header>
 
@@ -95,11 +95,17 @@
 
 <!-- Footer -->
 <footer class="w3-center w3-black w3-padding-48 w3-xxlarge">
-    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
 </footer>
 
 <script>
-    function openModal(modalId) {
+    function openModal(modalId, url, contentId) {
+        const contentElement = document.getElementById(contentId);
+
+        if (contentElement && !contentElement.innerHTML) { // Verificar si el contenedor existe y está vacío
+            loadContent(url, contentId);
+        }
+        
+        // Mostrar el modal
         document.getElementById(modalId).style.display = "block";
     }
 
@@ -107,17 +113,42 @@
         document.getElementById(modalId).style.display = "none";
     }
 
-    window.onload = function() {
-        loadContent('menu.html', 'menuContent');
-        loadContent('contacto.html', 'contactContent');
-    };
-
     function loadContent(url, elementId) {
-        fetch(url)
-            .then(response => response.text())
-            .then(data => document.getElementById(elementId).innerHTML = data)
-            .catch(error => console.error('Error cargando el contenido:', error));
+        const element = document.getElementById(elementId);
+        
+        if (element) { // Verificar si el contenedor existe
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    element.innerHTML = data;
+                })
+                .catch(error => console.error('Error cargando el contenido:', error));
+        }
     }
+
+    function openTab(evt, tabName) {
+        // Ocultar todas las secciones de menú
+        var i, x, tablinks;
+        x = document.getElementsByClassName("menu");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        
+        // Quitar el color rojo de todos los tabs
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].classList.remove("w3-red");
+        }
+
+        // Mostrar la sección seleccionada y marcar el tab activo
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.classList.add("w3-red");
+    }
+
+    // Ejecutar clic automáticamente en el primer tab (Pizza) al cargar el contenido del menú
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelector(".tablink")?.click();
+    });
 </script>
 
 </body>
