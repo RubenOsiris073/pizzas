@@ -1,6 +1,6 @@
+import io.javalin.Javalin
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
-import io.javalin.Javalin
 import java.sql.Connection
 import java.sql.DriverManager
 
@@ -95,8 +95,21 @@ fun main() {
             val orderItems = jacksonObjectMapper().readValue<List<Map<String, Any>>>(orderData)
 
             connectToDatabase().use { connection ->
-                val total = orderItems.sumOf { (it["price"] as Double) * (it["quantity"] as Int) }
+                // Calcular el total
+                val total = orderItems.sumOf {
+                    val price = when (val p = it["price"]) {
+                        is Int -> p.toDouble() // Convierte Int a Double
+                        is Double -> p
+                        else -> throw IllegalArgumentException("Precio inválido: $p")
+                    }
+                    val quantity = when (val q = it["quantity"]) {
+                        is Int -> q
+                        else -> throw IllegalArgumentException("Cantidad inválida: $q")
+                    }
+                    price * quantity
+                }
 
+                // Insertar la orden en la base de datos
                 val orderId = connection.prepareStatement(
                     "INSERT INTO Orders (total) VALUES (?)",
                     java.sql.Statement.RETURN_GENERATED_KEYS
@@ -107,13 +120,23 @@ fun main() {
                     if (keys.next()) keys.getInt(1) else throw Exception("No se pudo obtener el ID de la orden")
                 }
 
+                // Insertar los ítems de la orden
                 val sqlItem = "INSERT INTO OrderItems (orderId, itemName, price, quantity) VALUES (?, ?, ?, ?)"
                 connection.prepareStatement(sqlItem).use { statement ->
                     for (item in orderItems) {
+                        val price = when (val p = item["price"]) {
+                            is Int -> p.toDouble()
+                            is Double -> p
+                            else -> throw IllegalArgumentException("Precio inválido: $p")
+                        }
+                        val quantity = when (val q = item["quantity"]) {
+                            is Int -> q
+                            else -> throw IllegalArgumentException("Cantidad inválida: $q")
+                        }
                         statement.setInt(1, orderId)
                         statement.setString(2, item["itemName"].toString())
-                        statement.setDouble(3, item["price"] as Double)
-                        statement.setInt(4, item["quantity"] as Int)
+                        statement.setDouble(3, price)
+                        statement.setInt(4, quantity)
                         statement.addBatch()
                     }
                     statement.executeBatch()
