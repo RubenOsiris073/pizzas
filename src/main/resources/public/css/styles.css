@@ -1,0 +1,97 @@
+/* Estilo global para cuerpo y encabezados */
+body, html {
+    height: 100%;
+    font-family: "Amatic SC", sans-serif;
+}
+
+body, h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilo para la imagen de fondo */
+.bgimg {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('https://media.giphy.com/media/3o6Yg24rybQMeZQuxq/giphy.gif');
+    background-position: center;
+    min-height: 90%;
+}
+
+/* Ocultar pestañas del menú por defecto */
+.menu {
+    display: none;
+}
+
+/* Estilo para botones de pestañas */
+.tablink:hover {
+    background-color: #6f6463 !important;
+}
+
+/* Estilo genérico para las modales */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.modal-content {
+    margin: 5% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 800px;
+    background-color: rgba(86, 80, 80, 0.19);
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo específico para la ventana de Orden Final */
+.order-modal-content {
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+    margin: 5% auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.payment-modal-content {
+    background-color: white; /* Fondo blanco */
+    color: black; /* Texto negro */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 20px; /* Espaciado interno */
+    width: 80%; /* Ancho del 80% */
+    max-width: 600px; /* Máximo ancho de 600px */
+    margin: 5% auto; /* Centrarse horizontalmente y ligeramente vertical */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para destacar */
+    position: relative; /* Para ajustar contenido interno */
+}
+
+/* Estilo para el botón de cierre de las modales */
+.close {
+    color: #fff;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 35px;
+    font-weight: bold;
+    background: #ff4d4d;
+    border-radius: 100%;
+    padding: 0 10px;
+    cursor: pointer;
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+}
+
+.close:hover, .close:focus {
+    background: #ff6666;
+}
