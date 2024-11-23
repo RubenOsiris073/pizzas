@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
     <style>
         body, html {height: 100%}
         body,h1,h2,h3,h4,h5,h6 {font-family: "Amatic SC", sans-serif}
@@ -37,9 +38,19 @@
             padding: 20px;
             width: 80%;
             max-width: 800px;
-            background-color: #fff;
+            background-color: #56505031;
             position: relative;
         }
+        .order-modal-content {
+        background-color: white; /* Fondo blanco */
+        color: black; /* Texto negro */
+        border-radius: 10px;
+        padding: 20px;
+        width: 80%; /* Por defecto, ancho del 80% */
+        max-width: 600px; /* Ancho máximo de 600px */
+        margin: 5% auto; /* Centrarse horizontalmente y un poco vertical */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para destacar */
+    }
         .close {
             color: #fff;
             position: absolute;
@@ -48,7 +59,7 @@
             font-size: 35px;
             font-weight: bold;
             background: #ff4d4d;
-            border-radius: 50%;
+            border-radius: 100%;
             padding: 0 10px;
             cursor: pointer;
             z-index: 1000;
@@ -100,7 +111,7 @@
 
 <!-- Order Final Modal -->
 <div id="orderModal" class="modal">
-    <div class="modal-content w3-animate-top">
+    <div class="order-modal-content w3-animate-top">
         <span class="close" onclick="closeModal('orderModal')">&times;</span>
         <h1>Orden Final</h1>
         <div id="orderContent">

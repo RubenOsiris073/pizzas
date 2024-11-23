@@ -1,14 +1,24 @@
-<div class="w3-container w3-padding-64 w3-blue-grey w3-grayscale-min w3-xlarge">
+<div class="w3-container w3-padding-64 w3-black w3-grayscale-min w3-xlarge" style="text-align: center;">
     <div class="w3-content">
-        <h1 class="w3-center w3-jumbo" style="margin-bottom:64px">Contacto</h1>
-        <p>Encuéntranos en alguna dirección o llámanos al 05050515-122330</p>
-        <p><span class="w3-tag">Pizzas!!</span> Ofrecemos servicio de catering completo para cualquier evento.</p>
+        <h1 class="w3-center w3-jumbo w3-text-white" style="margin-bottom:64px">Contacto</h1>
+        <p class="w3-text-white">Encuéntranos en nuestra ubicación o llámanos al <strong>05050515-122330</strong></p>
+        <p class="w3-text-white"><span class="w3-tag">Pizzas!!</span> Ofrecemos servicio de catering completo para cualquier evento.</p>
+
+        <!-- Google Maps Embed -->
+        <div class="w3-margin-bottom" style="max-width: 100%; height: auto; text-align: center;">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2227.299708167115!2d-99.34502877652854!3d20.054702958470372!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2smx!4v1732397119021!5m2!1ses-419!2smx" 
+                width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+
+        <!-- Formulario de Contacto -->
         <form action="/action_page.php" target="_blank">
-            <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Nombre" required name="Name"></p>
-            <p><input class="w3-input w3-padding-16 w3-border" type="number" placeholder="Cantidad de personas" required name="People"></p>
-            <p><input class="w3-input w3-padding-16 w3-border" type="datetime-local" placeholder="Fecha y hora" required name="date"></p>
-            <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Mensaje \ Requerimientos especiales" required name="Message"></p>
-            <p><button class="w3-button w3-light-grey w3-block" type="submit">Enviar Mensaje</button></p>
+            <p><input class="w3-input w3-padding-16 w3-border w3-black w3-text-white" type="text" placeholder="Nombre" required name="Name"></p>
+            <p><input class="w3-input w3-padding-16 w3-border w3-black w3-text-white" type="number" placeholder="Cantidad de personas" required name="People"></p>
+            <p><input class="w3-input w3-padding-16 w3-border w3-black w3-text-white" type="datetime-local" placeholder="Fecha y hora" required name="date"></p>
+            <p><input class="w3-input w3-padding-16 w3-border w3-black w3-text-white" type="text" placeholder="Mensaje / Requerimientos especiales" required name="Message"></p>
+            <p><button class="w3-button w3-light-grey w3-block w3-hover-black w3-hover-text-white" type="submit">Enviar Mensaje</button></p>
         </form>
     </div>
 </div>

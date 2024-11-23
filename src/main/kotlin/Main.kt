@@ -1,6 +1,6 @@
-import io.javalin.Javalin
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
+import io.javalin.Javalin
 import java.sql.Connection
 import java.sql.DriverManager
 
@@ -92,18 +92,20 @@ fun main() {
 
             println("Datos recibidos: $orderData")
 
+            // Parsear los datos de la orden
             val orderItems = jacksonObjectMapper().readValue<List<Map<String, Any>>>(orderData)
 
             connectToDatabase().use { connection ->
                 // Calcular el total
                 val total = orderItems.sumOf {
                     val price = when (val p = it["price"]) {
-                        is Int -> p.toDouble() // Convierte Int a Double
+                        is Int -> p.toDouble() // Convierte Int a Double si es necesario
                         is Double -> p
                         else -> throw IllegalArgumentException("Precio inválido: $p")
                     }
                     val quantity = when (val q = it["quantity"]) {
                         is Int -> q
+                        is Double -> q.toInt() // Convierte Double a Int si es necesario
                         else -> throw IllegalArgumentException("Cantidad inválida: $q")
                     }
                     price * quantity
@@ -131,6 +133,7 @@ fun main() {
                         }
                         val quantity = when (val q = item["quantity"]) {
                             is Int -> q
+                            is Double -> q.toInt()
                             else -> throw IllegalArgumentException("Cantidad inválida: $q")
                         }
                         statement.setInt(1, orderId)
@@ -149,6 +152,7 @@ fun main() {
             e.printStackTrace()
         }
     }
+
 
     // Endpoint para listar órdenes
     app.get("/orders") { ctx ->
