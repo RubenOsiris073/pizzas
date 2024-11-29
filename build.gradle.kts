@@ -29,15 +29,26 @@ tasks.withType<Jar> {
         attributes("Main-Class" to "mx.edu.uttt.MainKt")
     }
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
+
+    // Incluye dependencias del classpath
     from(configurations.runtimeClasspath.get()
-        .onEach { println("add from dependencies: ${it.name}") }
+        .onEach { println("Adding from dependencies: ${it.name}") }
         .filter { it.name.endsWith("jar") }
         .map { if (it.isDirectory) it else zipTree(it) }) {
         exclude("META-INF/INDEX.LIST", "META-INF/*.SF", "META-INF/*.DSA", "META-INF/*.RSA")
     }
+
+    // Incluye recursos del directorio "resources"
+    from(sourceSets.main.get().output) {
+        include("public/**") // Incluye únicamente recursos estáticos en public
+        println("Adding static resources from: ${sourceSets.main.get().output}")
+    }
+
+    // Incluye los archivos fuente principales
     sourceSets.main.get()
-        .allSource.forEach { println("add from sources: ${it.canonicalPath}") }
+        .allSource.forEach { println("Adding from sources: ${it.canonicalPath}") }
 }
+
 
 application {
     mainClass.set("mx.edu.uttt.MainKt")

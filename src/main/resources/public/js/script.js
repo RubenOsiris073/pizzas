@@ -119,25 +119,25 @@ function sendOrderToServer() {
         return;
     }
 
-    fetch("http://localhost:7000/order", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ items: order }),
-    })
-        .then(response => {
-            if (response.ok) {
-                alert("Orden enviada exitosamente al servidor.");
-                clearOrder();
-            } else {
-                response.text().then(text => alert("Error al enviar la orden: " + text));
-            }
-        })
-        .catch(error => {
-            console.error("Error al enviar la orden:", error);
-            alert("No se pudo enviar la orden al servidor.");
-        });
+   fetch("/order", {
+       method: "POST",
+       headers: {
+           "Content-Type": "application/json",
+       },
+       body: JSON.stringify({ items: order }),
+   })
+       .then(response => {
+           if (response.ok) {
+               alert("Orden enviada exitosamente al servidor.");
+               clearOrder();
+           } else {
+               response.text().then(text => alert("Error al enviar la orden: " + text));
+           }
+       })
+       .catch(error => {
+           console.error("Error al enviar la orden:", error);
+           alert("No se pudo enviar la orden al servidor.");
+       });
 }
 
 // Asignar acciones a tabs y botones

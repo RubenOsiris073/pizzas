@@ -4,31 +4,32 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import io.javalin.Javalin
 import java.sql.Connection
 import java.sql.DriverManager
+import java.util.Properties
+import java.io.FileInputStream
+import io.javalin.http.staticfiles.Location
+
 
 fun main() {
-    // Configuración de la base de datos
-    val url = "jdbc:firebirdsql://localhost:3050/dessert?encoding=UTF8"
-    val user = "sysdba"
-    val password = "MyPass123"
+    // Extraer configuración desde el objeto Config
+    val config = Config.SVR_CONF
 
-    // Función para conectar a la base de datos
-    fun connectToDatabase(): Connection = DriverManager.getConnection(url, user, password)
+    // Crear conexión a la base de datos
+    fun connectToDatabase(): Connection = DriverManager.getConnection(config.dbURL, config.dbUser, config.dbPwd)
 
-    // Verificar conexión al inicio
+    // Verificar conexión inicial
     try {
         connectToDatabase().use {
-            println("Conexión exitosa a la base de datos.")
+            println("Conexión exitosa a la base de datos en ${config.dbURL}")
         }
     } catch (e: Exception) {
         println("Error al conectar a la base de datos: ${e.message}")
-        e.printStackTrace()
         return
     }
 
     // Configuración del servidor
     val app = Javalin.create { config ->
-        config.staticFiles.add("src/main/resources/public", io.javalin.http.staticfiles.Location.EXTERNAL)
-    }.start(7000)
+        config.staticFiles.add("/public", Location.CLASSPATH) // Carga desde el CLASSPATH
+    }.start(443)
 
     // Endpoint para la página principal
     app.get("/") { ctx ->
